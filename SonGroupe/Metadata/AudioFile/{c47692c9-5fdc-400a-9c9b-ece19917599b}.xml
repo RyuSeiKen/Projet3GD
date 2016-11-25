@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{c47692c9-5fdc-400a-9c9b-ece19917599b}">
+        <property name="assetPath">
+            <value>Terran 2.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>238.68081632653062</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{de882905-20e2-418d-b007-a1fb08e60815}</destination>
+        </relationship>
+    </object>
+</objects>
