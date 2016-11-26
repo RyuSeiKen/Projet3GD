@@ -13,9 +13,9 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public bool immobile = false;
 
-  	float speed = 10;
+  	public float speed = 10;
 
-	void Update () 
+	void FixedUpdate () 
 	{
 	    Vector3 pos = transform.position;
 	    if(Input.GetKey(Left)) 
@@ -28,27 +28,27 @@ public class PlayerControl : MonoBehaviour
 		}
 	    if(Input.GetKey(Down)) 
 		{
-			pos.y -= speed * Time.deltaTime;
+			pos.z -= speed * Time.deltaTime;
 		}
 	    if(Input.GetKey(Up)) 
 		{
-			pos.y += speed * Time.deltaTime;
+			pos.z += speed * Time.deltaTime;
 		}
-		if(Input.anyKey) 
-		{
-			timeSinceMobile = 0;
-		}
+		transform.position = pos;
 
-	    transform.position = pos;
-		timeSinceMobile += Time.deltaTime;
 
-		if(timeSinceMobile > 0.5f)
-		{
-			immobile = true;
-		}
-		else
-		{
-			immobile = false;
-		}
+//		if(Input.anyKey) 
+//		{
+//			timeSinceMobile = 0;
+//		}
+//		timeSinceMobile += Time.deltaTime;
+//		if(timeSinceMobile > 0.5f)
+//		{
+//			immobile = true;
+//		}
+//		else
+//		{
+//			immobile = false;
+//		}
 	}
 }
