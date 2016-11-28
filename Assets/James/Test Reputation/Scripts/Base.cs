@@ -7,6 +7,7 @@ public class Base : MonoBehaviour
 	public string color;
 	public List<Vector3> homePoints;
 	public int homePointNumber = 8;
+	public Vector3 spot;
 
 	void Awake () 
 	{
@@ -25,5 +26,7 @@ public class Base : MonoBehaviour
 		{
 			Gizmos.DrawSphere(homePoints[i], 1f);
 		}
+		Gizmos.color = Color.blue;
+		Gizmos.DrawSphere(spot, 1f);
 	}
 }
