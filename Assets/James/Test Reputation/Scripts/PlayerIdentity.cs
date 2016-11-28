@@ -6,10 +6,12 @@ public class PlayerIdentity : MonoBehaviour
 	public string playerColor = "None";
 	Color startCol;
 
+	// Inputs
 	KeyCode Space = KeyCode.Space;
 	KeyCode A = KeyCode.A;
 	KeyCode F = KeyCode.F;
 
+	// Config
 	Base[] baseArray;
 	ReputationManager manager;
 
@@ -105,6 +107,4 @@ public class PlayerIdentity : MonoBehaviour
 		}
 		return closeBase;
 	}
-
-
 }
