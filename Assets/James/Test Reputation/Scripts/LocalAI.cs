@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class LocalAI : MonoBehaviour 
 {
 	public string color;
-	GameObject myBase;
+	Base myBase;
 	public List<Vector3> homePoints;
 	Vector3 nextPoint;
 
 	void Start () 
 	{
-		myBase = GameObject.Find(color + " Base");
+		myBase = GameObject.Find(color + " Base").GetComponent<Base>();
 		for(int i = 0; i < myBase.GetComponent<Base>().homePointNumber; i++)
 		{
 			homePoints.Add(myBase.GetComponent<Base>().homePoints[i]);
