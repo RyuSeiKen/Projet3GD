@@ -12,7 +12,7 @@ public class Explode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        Debug.Log(explosionCenter);
+       
         explosionRadius = 1000;
               
         foreach (Transform child in transform)

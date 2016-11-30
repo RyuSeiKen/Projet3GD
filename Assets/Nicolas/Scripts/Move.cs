@@ -19,6 +19,7 @@ public class Move : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		ReduceSpeed = Mathf.Sqrt((Speed*Speed)/2);
 		_movement = gameObject.transform.position;
 
         if (Input.GetKey(_up))
