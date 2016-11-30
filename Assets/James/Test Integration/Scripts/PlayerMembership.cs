@@ -77,7 +77,7 @@ public class PlayerMembership : MonoBehaviour
 	void Give()
 	{
 		Base closestBase = GetClosestBase(baseArray);
-		if(Vector3.Distance(transform.position, closestBase.transform.position) < 10)
+		if(Vector3.Distance(transform.position, closestBase.transform.position) < 10 && closestBase.color == currentQuest)
 		{
 			item = false;
 			qManager.QuestComplete(currentQuest);

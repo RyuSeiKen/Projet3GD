@@ -82,15 +82,24 @@ public class QuestManager : MonoBehaviour
 		playerM.currentQuest = "None";
 		if(color == "Green")
 		{
-			playerM.GetComponent<Renderer>().material.color = Color.green;
+            playerM.gameObject.GetComponent<testsaut>().enabled = true;
+            playerM.gameObject.GetComponent<Boule>().enabled = false;
+            playerM.gameObject.tag = "Untagged";
+            playerM.GetComponent<Renderer>().material.color = Color.green;
 		}
 		else if(color == "Blue")
 		{
-			playerM.GetComponent<Renderer>().material.color = Color.blue;
+            playerM.gameObject.GetComponent<testsaut>().enabled = false;
+            playerM.gameObject.GetComponent<Boule>().enabled = true;
+            playerM.gameObject.tag = "Untagged";
+            playerM.GetComponent<Renderer>().material.color = Color.blue;
 		}
 		if(color == "Red")
 		{
-			playerM.GetComponent<Renderer>().material.color = Color.red;
+            playerM.gameObject.GetComponent<testsaut>().enabled = false;
+            playerM.gameObject.GetComponent<testsaut>().enabled = false;
+            playerM.gameObject.tag = "Player";
+            playerM.GetComponent<Renderer>().material.color = Color.red;
 		}
 	}
 
