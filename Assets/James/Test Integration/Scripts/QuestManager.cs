@@ -4,54 +4,87 @@ using System.Collections;
 public class QuestManager : MonoBehaviour 
 {	
 	PlayerMembership player;
+	QuestItem[] questItems;
+	QuestItem currentItem;
+	int r;
 
 	void Start() 
 	{
 		player = FindObjectOfType<PlayerMembership>();
+		questItems = FindObjectsOfType<QuestItem>();
 	}
 
-	public void GreenQuest()
+	public void GetQuest(string color)
 	{
-		if(player.currentQuest == "Green")
+		if(player.currentQuest == color)
 		{
-			Debug.Log("You've already accepted the green quest.");
+			Debug.Log("You've already accepted the " + color + " quest.");
 			return;
 		}
-		if(player.currentQuest != "None" && player.currentQuest != "Green")
+
+		if(player.currentQuest != "None" && player.currentQuest != color)
 		{
 			Debug.Log(player.currentQuest + " quest abandoned.");
+
+			player.groupBetrayed = player.currentQuest;
+
+			questItems[r].gameObject.SetActive(true);
+			currentItem.takeAble = false;
+			currentItem.GetComponent<Renderer>().material.color = Color.black;
 		}
+
 		Debug.Log("Find the item we ask for.");
-		player.currentQuest = "Green";
+
+		r = Random.Range(0, questItems.Length);
+		currentItem = questItems[r];
+		questItems[r].takeAble = true;
+
+		player.currentQuest = color;
+		if(color == "Green")
+		{
+			questItems[r].GetComponent<Renderer>().material.color = Color.green;
+		}
+		else if(color == "Blue")
+		{
+			questItems[r].GetComponent<Renderer>().material.color = Color.blue;
+		}
+		if(color == "Red")
+		{
+			questItems[r].GetComponent<Renderer>().material.color = Color.red;
+		}
 	}
 
-	public void BlueQuest()
+	public void QuestComplete(string color)
 	{
-		if(player.currentQuest == "Blue")
+		Debug.Log("Well done");
+
+		questItems[r].gameObject.SetActive(true);
+		questItems[r].takeAble = false;
+		questItems[r].GetComponent<Renderer>().material.color = Color.black;
+
+		if(player.playerColor != "None" && player.playerColor != color)
 		{
-			Debug.Log("You've already accepted the blue quest.");
-			return;
+			player.groupBetrayed = player.playerColor;
 		}
-		if(player.currentQuest != "None" && player.currentQuest != "Blue")
+
+		player.playerColor = color;
+		player.currentQuest = "None";
+		if(color == "Green")
 		{
-			Debug.Log(player.currentQuest + " quest abandoned.");
+			player.GetComponent<Renderer>().material.color = Color.green;
 		}
-		Debug.Log("Answer the question correctly.");
-		player.currentQuest = "Blue";
+		else if(color == "Blue")
+		{
+			player.GetComponent<Renderer>().material.color = Color.blue;
+		}
+		if(color == "Red")
+		{
+			player.GetComponent<Renderer>().material.color = Color.red;
+		}
 	}
 
-	public void RedQuest()
+	public void Refuse()
 	{
-		if(player.currentQuest == "Red")
-		{
-			Debug.Log("You've already accepted the red quest.");
-			return;
-		}
-		if(player.currentQuest != "None" && player.currentQuest != "Red")
-		{
-			Debug.Log(player.currentQuest + " quest abandoned.");
-		}
-		Debug.Log("Attack another faction.");
-		player.currentQuest = "Red";
+		Debug.Log("Traitor!");
 	}
 }

@@ -7,6 +7,7 @@ public class ReputationManager : MonoBehaviour
 	Base[] baseArray;
 	NomadAI[] nomadAIs;
 
+	[HideInInspector]
 	public List<Relation> relationList = new List<Relation>();
 
 	void Start () 

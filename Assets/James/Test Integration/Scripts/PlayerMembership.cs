@@ -2,13 +2,20 @@
 using System.Collections;
 
 public class PlayerMembership : MonoBehaviour 
-{
+{	
+	[HideInInspector]
 	public string playerColor = "None";
+	[HideInInspector]
 	public string currentQuest = "None";
+	[HideInInspector]
+	public string groupBetrayed = "None";
+
+	[HideInInspector]
+	public bool item = false;
 
 	// Inputs
 	KeyCode R = KeyCode.R;
-//	KeyCode G = KeyCode.G;
+	KeyCode G = KeyCode.G;
 
 	// Config
 	Base[] baseArray;
@@ -26,10 +33,10 @@ public class PlayerMembership : MonoBehaviour
 		{
 			Request();
 		}
-//		if(Input.GetKeyDown(G) && currentQuest != "None")
-//		{
-//			Give();
-//		}
+		if(Input.GetKeyDown(G) && currentQuest != "None" && item)
+		{
+			Give();
+		}
 	}
 
 	void Request()
@@ -38,18 +45,12 @@ public class PlayerMembership : MonoBehaviour
 		if(Vector3.Distance(transform.position, closestBase.transform.position) < 10)
 		{
 			string color = closestBase.color;
-			if(color == "Green")
+			if(groupBetrayed == color)
 			{
-				manager.GreenQuest();
+				manager.Refuse();
+				return;
 			}
-			if(color == "Blue")
-			{
-				manager.BlueQuest();
-			}
-			if(color == "Red")
-			{
-				manager.RedQuest();
-			}
+			manager.GetQuest(color);
 		}
 	}
 
@@ -58,7 +59,8 @@ public class PlayerMembership : MonoBehaviour
 		Base closestBase = GetClosestBase(baseArray);
 		if(Vector3.Distance(transform.position, closestBase.transform.position) < 10)
 		{
-
+			item = false;
+			manager.QuestComplete(currentQuest);
 		}
 	}
 
