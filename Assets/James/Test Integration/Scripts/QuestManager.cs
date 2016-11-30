@@ -3,30 +3,34 @@ using System.Collections;
 
 public class QuestManager : MonoBehaviour 
 {	
-	PlayerMembership player;
+	PlayerMembership playerM;
+	PlayerIdentity playerI;
+	ReputationManager rManager;
 	QuestItem[] questItems;
 	QuestItem currentItem;
 	int r;
 
 	void Start() 
 	{
-		player = FindObjectOfType<PlayerMembership>();
+		rManager =  FindObjectOfType<ReputationManager>();
+		playerM = FindObjectOfType<PlayerMembership>();
+		playerI = FindObjectOfType<PlayerIdentity>();
 		questItems = FindObjectsOfType<QuestItem>();
 	}
 
 	public void GetQuest(string color)
 	{
-		if(player.currentQuest == color)
+		if(playerM.currentQuest == color)
 		{
 			Debug.Log("You've already accepted the " + color + " quest.");
 			return;
 		}
 
-		if(player.currentQuest != "None" && player.currentQuest != color)
+		if(playerM.currentQuest != "None" && playerM.currentQuest != color)
 		{
-			Debug.Log(player.currentQuest + " quest abandoned.");
+			Debug.Log(playerM.currentQuest + " quest abandoned.");
 
-			player.groupBetrayed = player.currentQuest;
+			playerM.groupBetrayed = playerM.currentQuest;
 
 			questItems[r].gameObject.SetActive(true);
 			currentItem.takeAble = false;
@@ -39,7 +43,7 @@ public class QuestManager : MonoBehaviour
 		currentItem = questItems[r];
 		questItems[r].takeAble = true;
 
-		player.currentQuest = color;
+		playerM.currentQuest = color;
 		if(color == "Green")
 		{
 			questItems[r].GetComponent<Renderer>().material.color = Color.green;
@@ -62,29 +66,36 @@ public class QuestManager : MonoBehaviour
 		questItems[r].takeAble = false;
 		questItems[r].GetComponent<Renderer>().material.color = Color.black;
 
-		if(player.playerColor != "None" && player.playerColor != color)
+		foreach(Relation rel in rManager.relationList)
 		{
-			player.groupBetrayed = player.playerColor;
+			if(rel.color1 == playerM.GetClosestBase(playerM.baseArray).color && rel.color2 == playerM.playerColor || rel.color1 == playerM.playerColor && rel.color2 == playerM.GetClosestBase(playerM.baseArray).color)
+			{
+				if(playerM.playerColor != "None" && playerM.playerColor != color && rel.relationLevel < 70)
+				{
+					playerM.groupBetrayed = playerM.playerColor;
+				}
+			}
 		}
 
-		player.playerColor = color;
-		player.currentQuest = "None";
+		playerM.playerColor = color;
+		playerI.playerColor = color;
+		playerM.currentQuest = "None";
 		if(color == "Green")
 		{
-			player.GetComponent<Renderer>().material.color = Color.green;
+			playerM.GetComponent<Renderer>().material.color = Color.green;
 		}
 		else if(color == "Blue")
 		{
-			player.GetComponent<Renderer>().material.color = Color.blue;
+			playerM.GetComponent<Renderer>().material.color = Color.blue;
 		}
 		if(color == "Red")
 		{
-			player.GetComponent<Renderer>().material.color = Color.red;
+			playerM.GetComponent<Renderer>().material.color = Color.red;
 		}
 	}
 
-	public void Refuse()
+	public void Refuse(string reason)
 	{
-		Debug.Log("Traitor!");
+		Debug.Log(reason);
 	}
 }

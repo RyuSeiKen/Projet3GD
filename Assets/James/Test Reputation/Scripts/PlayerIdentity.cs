@@ -7,7 +7,7 @@ public class PlayerIdentity : MonoBehaviour
 	Color startCol;
 
 	// Inputs
-	KeyCode Space = KeyCode.Space;
+//	KeyCode Space = KeyCode.Space;
 	KeyCode A = KeyCode.A;
 	KeyCode F = KeyCode.F;
 
@@ -24,10 +24,10 @@ public class PlayerIdentity : MonoBehaviour
 
 	void Update() 
 	{
-		if(Input.GetKeyDown(Space))
-		{
-			Integrate();
-		}
+//		if(Input.GetKeyDown(Space))
+//		{
+//			Integrate();
+//		}
 		if(Input.GetKeyDown(F) && playerColor != "None")
 		{
 			Flower();

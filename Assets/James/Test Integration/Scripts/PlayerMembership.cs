@@ -18,13 +18,15 @@ public class PlayerMembership : MonoBehaviour
 	KeyCode G = KeyCode.G;
 
 	// Config
-	Base[] baseArray;
-	QuestManager manager;
+	public Base[] baseArray;
+	QuestManager qManager;
+	ReputationManager rManager;
 
 	void Start() 
 	{
 		baseArray = FindObjectsOfType<Base>();
-		manager = FindObjectOfType<QuestManager>();
+		qManager = FindObjectOfType<QuestManager>();
+		rManager = FindObjectOfType<ReputationManager>();
 	}
 
 	void Update() 
@@ -47,10 +49,28 @@ public class PlayerMembership : MonoBehaviour
 			string color = closestBase.color;
 			if(groupBetrayed == color)
 			{
-				manager.Refuse();
+				qManager.Refuse("Traitor!");
 				return;
 			}
-			manager.GetQuest(color);
+			foreach(Relation r in rManager.relationList)
+			{
+				if(r.color1 == closestBase.color && r.color2 == playerColor || r.color1 == playerColor && r.color2 == closestBase.color)
+				{
+					if(r.relationLevel < 30)
+					{
+						qManager.Refuse("We hate you!");
+						return;
+					}
+					else if(r.relationLevel > 70)
+					{
+						qManager.QuestComplete(color);
+						groupBetrayed = "None";
+						return;
+					}
+				}
+			}
+
+			qManager.GetQuest(color);
 		}
 	}
 
@@ -60,11 +80,11 @@ public class PlayerMembership : MonoBehaviour
 		if(Vector3.Distance(transform.position, closestBase.transform.position) < 10)
 		{
 			item = false;
-			manager.QuestComplete(currentQuest);
+			qManager.QuestComplete(currentQuest);
 		}
 	}
 
-	Base GetClosestBase(Base[] bases)
+	public Base GetClosestBase(Base[] bases)
 	{
 		Base closeBase = null;
 		float minDist = Mathf.Infinity;
