@@ -3,7 +3,14 @@ using System.Collections;
 
 public class QuestItem : MonoBehaviour 
 {
-	bool takeAble = false;
+	[HideInInspector]
+	public bool takeAble = false;
+	PlayerMembership player;
+
+	void Start()
+	{
+		player = FindObjectOfType<PlayerMembership>();
+	}
 
 	void Update () 
 	{
@@ -15,6 +22,8 @@ public class QuestItem : MonoBehaviour
 		if(takeAble)
 		{
 			gameObject.SetActive(false);
+			player.item = true;
+			Debug.Log("Item obtained");
 		}
 	}
 }

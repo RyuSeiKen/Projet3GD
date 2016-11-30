@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Base : MonoBehaviour 
 {
 	public string color;
+	[HideInInspector]
 	public List<Vector3> homePoints;
 	public int homePointNumber = 8;
 	public Vector3 spot;
