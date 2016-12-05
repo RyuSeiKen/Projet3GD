@@ -43,7 +43,8 @@ public class ControllerManette : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		//Make the player follow slope of simple gameObject
 		RaycastHit hit;
 
 		Ray find = new Ray(gameObject.transform.position, new Vector3(0, -1, 0));
@@ -52,7 +53,7 @@ public class ControllerManette : MonoBehaviour {
 
 
 			if (_ground != hit.transform.gameObject || _ground == null) {
-				_gravityCenter.transform.up = hit.transform.up;
+				_gravityCenter.transform.up = hit.normal;
 				_gravityCenter.transform.Rotate (_pivot.transform.localRotation.eulerAngles);
 				_ground = hit.transform.gameObject;
 								
@@ -74,6 +75,24 @@ public class ControllerManette : MonoBehaviour {
 			_gravityCenter.transform.forward = _pivot.transform.forward;
 		}
 
+		//Make the player follow the slope of simple gameObject
+		/*Ray ray = new Ray (gameObject.transform.position, Vector3.down);
+
+		RaycastHit hitInfo;
+
+
+
+		if (Physics.Raycast (ray, out hitInfo)) 
+		{
+			float y = hitInfo.point.y;
+
+			Vector3 pos = gameObject.transform.position;
+
+			pos.y = y+1.1f;
+			Debug.Log (y);
+			gameObject.transform.position = pos;
+		}*/
+
 		//Debug.Log (_gravityCenter.transform.up +" "+ hit.transform.up);
 		gameObject.transform.forward = Vector3.Lerp(gameObject.transform.forward, new Vector3(_hDisplacment.x +_vDisplacment.x,0, _hDisplacment.z + _vDisplacment.z), 0.45f);
 
@@ -87,6 +106,9 @@ public class ControllerManette : MonoBehaviour {
         if (Input.GetButton("Jump"))
         {
             _jumpVelocity = Vector3.up * _jumpSpeed;
+
+			//Highter if you press more
+			//_jumpVelocity = Vector3.Lerp(_jumpVelocity, Vector3.up * _jumpSpeed, 0.2f);
         }
     }
 
@@ -104,6 +126,7 @@ public class ControllerManette : MonoBehaviour {
         // Add jump velocity
         _velocity += _jumpVelocity;
 
+
         CollisionFlags cFlags = _character.Move(_velocity * Time.deltaTime);
 
         if( _velocity.y < 0 &&
@@ -117,6 +140,8 @@ public class ControllerManette : MonoBehaviour {
             
         }  			                      
         _velocity = Vector3.zero;
+
+        
                
     }
 }

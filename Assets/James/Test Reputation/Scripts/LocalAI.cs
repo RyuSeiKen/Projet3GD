@@ -17,8 +17,8 @@ public class LocalAI : MonoBehaviour
 			homePoints.Add(myBase.GetComponent<Base>().homePoints[i]);
 		}
 		nextPoint = homePoints[Random.Range(0, homePoints.Count)];
-		GetComponent<NavMeshAgent>().SetDestination(nextPoint);
-		GetComponent<NavMeshAgent>().avoidancePriority = Random.Range(0, 100);
+		GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(nextPoint);
+		GetComponent<UnityEngine.AI.NavMeshAgent>().avoidancePriority = Random.Range(0, 100);
 	}
 	
 	void Update () 
@@ -26,7 +26,7 @@ public class LocalAI : MonoBehaviour
 		if(Vector3.Distance(transform.position, nextPoint) < 1f)
 		{
 			nextPoint = homePoints[Random.Range(0, homePoints.Count)];
-			GetComponent<NavMeshAgent>().SetDestination(nextPoint);
+			GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(nextPoint);
 		}
 	}
 }

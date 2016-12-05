@@ -22,31 +22,31 @@ public class NomadAI : MonoBehaviour
 			travelPoints.Add(baseArray[i].GetComponent<Base>().spot);
 		}
 		nextPoint = travelPoints[Random.Range(0, travelPoints.Count)];
-		GetComponent<NavMeshAgent>().SetDestination(nextPoint);
-		GetComponent<NavMeshAgent>().avoidancePriority = Random.Range(0, 100);
+		GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(nextPoint);
+		GetComponent<UnityEngine.AI.NavMeshAgent>().avoidancePriority = Random.Range(0, 100);
 	}
 
 	void Update () 
 	{
-		GetComponent<NavMeshAgent>().speed = 2;
+		GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 2;
 		if(Vector3.Distance(transform.position, nextPoint) < 1f)
 		{
 			nextPoint = travelPoints[Random.Range(0, travelPoints.Count)];
-			GetComponent<NavMeshAgent>().SetDestination(nextPoint);
+			GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(nextPoint);
 		}
 		foreach(Base b in enemyBases)
 		{
 			if(b.spot == nextPoint)
 			{
 				nextPoint = travelPoints[Random.Range(0, travelPoints.Count)];
-				GetComponent<NavMeshAgent>().SetDestination(nextPoint);
+				GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(nextPoint);
 			}
 		}
 		foreach(Base b in friendlyBases)
 		{
 			if(b.spot == nextPoint)
 			{
-				GetComponent<NavMeshAgent>().speed = 5;
+				GetComponent<UnityEngine.AI.NavMeshAgent>().speed = 5;
 			}
 		}
 	}
