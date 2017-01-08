@@ -8,11 +8,6 @@ public class PlayerControl : MonoBehaviour
    	KeyCode Up = KeyCode.UpArrow;
   	KeyCode Down = KeyCode.DownArrow;
 
-	[HideInInspector]
-	public float timeSinceMobile;
-	[HideInInspector]
-	public bool immobile = false;
-
   	public float speed = 10;
 
 	void FixedUpdate () 
@@ -35,20 +30,5 @@ public class PlayerControl : MonoBehaviour
 			pos.z += speed * Time.deltaTime;
 		}
 		transform.position = pos;
-
-
-//		if(Input.anyKey) 
-//		{
-//			timeSinceMobile = 0;
-//		}
-//		timeSinceMobile += Time.deltaTime;
-//		if(timeSinceMobile > 0.5f)
-//		{
-//			immobile = true;
-//		}
-//		else
-//		{
-//			immobile = false;
-//		}
 	}
 }

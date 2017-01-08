@@ -20,12 +20,12 @@ public class CameraRotation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Screen.lockCursor = true;
-
-		if (Input.GetKey (KeyCode.Escape)) 
-		{
-			Screen.lockCursor = false;
-		}
+//		Screen.lockCursor = true;
+//
+//		if (Input.GetKey (KeyCode.Escape)) 
+//		{
+//			Screen.lockCursor = false;
+//		}
 
 
 		float h = horizontalSpeed * Input.GetAxis ("Mouse X");

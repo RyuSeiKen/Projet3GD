@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{2f1d8825-dc2b-4b09-952d-56b67fdafdf9}">
+        <property name="assetPath">
+            <value>43 Level Up.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>3.3436734693877552</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{de882905-20e2-418d-b007-a1fb08e60815}</destination>
+        </relationship>
+    </object>
+</objects>
